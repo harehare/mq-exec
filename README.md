@@ -2,15 +2,15 @@
 
 **Executable Markdown** — embed [mq](https://mqlang.org) queries inside Markdown code blocks and replace them with live results.
 
-![demo](demo.gif)
+![demo](assets/demo.gif)
 
-```markdown
+````markdown
 ## Pending tasks
 
 ```mq { exec: true, render: "list", input: "tasks.md" }
 .todo | .value
 ```
-```
+````
 
 Running `mq-exec process report.md` rewrites the block in-place:
 
@@ -136,30 +136,30 @@ Blocks without `exec: true` are left untouched, so ordinary code samples are saf
 The runtime reads the file(s) via the injected `FileLoader` before the query runs.  
 This works in any environment, including WebAssembly, because no filesystem call happens inside the engine.
 
-```markdown
+````markdown
 ```mq { exec: true, render: "list", input: "tasks.md" }
 .todo | .value
 ```
-```
+````
 
 Multiple files are concatenated in order:
 
-```markdown
+````markdown
 ```mq { exec: true, render: "list", input: ["tasks.md", "backlog.md"] }
 .todo | .value
 ```
-```
+````
 
 ### 2 — `load_markdown()` inside the query (native only)
 
 Uses mq's built-in `load_markdown(path)` function (`read_file | to_markdown`).  
 Requires the `file-io` feature and direct filesystem access.
 
-```markdown
+````markdown
 ```mq { exec: true, render: "list" }
 load_markdown("tasks.md") | .list | .value
 ```
-```
+````
 
 ---
 
