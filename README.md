@@ -235,46 +235,6 @@ impl FileLoader for FetchLoader {
 }
 ```
 
----
-
-## Architecture
-
-```
-┌─────────────────────────────────────────────────────────┐
-│                   ExecMarkdownRuntime<L>                 │
-│                                                         │
-│  find_exec_blocks()                                     │
-│    └─ mq engine: .code                                  │
-│         └─ RuntimeValue::Markdown(Node::Code)           │
-│              lang="mq", meta has exec:true, position    │
-│                                                         │
-│  execute()                                              │
-│    ├─ resolve_input()                                   │
-│    │    ├─ input: ["file"] → FileLoader.load()  ← DI   │
-│    │    └─ (none)          → null_input()               │
-│    │         └─ query uses load_markdown() internally   │
-│    └─ mq engine: eval(query, input)                     │
-│                                                         │
-│  render_values(format)                                  │
-│    └─ list / ol / table / code / markdown               │
-│                                                         │
-│  apply_line_replacements()                              │
-│    └─ replace original fence block by line range        │
-└─────────────────────────────────────────────────────────┘
-```
-
-### Key files
-
-| File | Role |
-|------|------|
-| `src/block.rs` | `BlockAttributes` parser, `ExecBlock` struct |
-| `src/loader.rs` | `FileLoader` trait, `LocalFileLoader`, `MockFileLoader` |
-| `src/renderer.rs` | `RuntimeValue` → Markdown string conversion |
-| `src/runtime.rs` | Orchestrates detection → execution → replacement |
-| `src/main.rs` | `process` / `watch` / `demo` CLI commands |
-
----
-
 ## License
 
 MIT
