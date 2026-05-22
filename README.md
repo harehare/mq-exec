@@ -1,6 +1,8 @@
-# mq-exec
+<h1 align="center">mq-exec</h1>
 
 **Executable Markdown** — embed [mq](https://mqlang.org) queries inside Markdown code blocks and replace them with live results.
+
+![demo](demo.gif)
 
 ```markdown
 ## Pending tasks
