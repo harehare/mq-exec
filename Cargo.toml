@@ -1,0 +1,24 @@
+[package]
+name = "mq-exec"
+version = "0.1.0"
+edition = "2021"
+description = "Executable Markdown runtime - run embedded mq queries and replace code blocks with results"
+license = "MIT"
+readme = "README.md"
+
+[[bin]]
+name = "mq-exec"
+path = "src/main.rs"
+
+[lib]
+name = "mq_exec"
+path = "src/lib.rs"
+
+[dependencies]
+mq-lang = { path = "../mq/crates/mq-lang", features = ["file-io"] }
+mq-markdown = { path = "../mq/crates/mq-markdown" }
+clap = { version = "4", features = ["derive"] }
+miette = { version = "7", features = ["fancy"] }
+thiserror = "2"
+regex = "1"
+notify = "6"
