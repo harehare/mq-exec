@@ -15,8 +15,8 @@ name = "mq_exec"
 path = "src/lib.rs"
 
 [dependencies]
-mq-lang = { path = "../mq/crates/mq-lang", features = ["file-io"] }
-mq-markdown = { path = "../mq/crates/mq-markdown" }
+mq-lang = { verion = "0.5.30", features = ["file-io"] }
+mq-markdown = "0.5.30"
 clap = { version = "4", features = ["derive"] }
 miette = { version = "7", features = ["fancy"] }
 thiserror = "2"
